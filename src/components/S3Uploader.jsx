@@ -48,7 +48,7 @@ export const S3Uploader = () => {
         console.log("cargando a s3", Location);
     };
     return (
-        <div style={{ marginTop: "150px" }}>
+        <div className="Container my-4">
             <h1>Subida de archivo simple</h1>
             <input type="file" onChange={handleFileSelect} />
             {file && (
