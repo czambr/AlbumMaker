@@ -1,3 +1,7 @@
+// ------------------------------------------
+//      Importacion de Contexto
+// ------------------------------------------
+import { albumContext } from "../App";
 // ---------------------------------------------------------
 //  ==> Import de Credenciales de AWS
 // ---------------------------------------------------------
@@ -12,54 +16,60 @@ import {
 // ---------------------------------------------------------
 //  ==> Import de las dependencias
 // ---------------------------------------------------------
-import React from "react";
 import AWS from "aws-sdk";
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 
 // ---------------------------------------------------------
-
+//  Configuration  AWS
+// ---------------------------------------------------------
 AWS.config.update({
     accessKeyId: AWS_ACCESS_KEY_ID,
     secretAccessKey: AWS_SECRET_ACCESS_KEY,
     region: AWS_REGION,
     sessionToken: AWS_SESSION_TOKEN,
 });
+// ---------------------------------------------------------
 
 export const S3Uploader = () => {
     const s3 = new AWS.S3();
-    const [imageUrl, setImageUrl] = useState(null);
-    const [file, setFile] = useState(null);
+    const [imageUrls, setImageUrls] = useState([]);
 
-    const handleFileSelect = e => {
-        setFile(e.target.files[0]);
-    };
-
+    const [files, setFiles] = useContext(albumContext);
     const uploadToS3 = async () => {
-        if (!file) {
+        if (files.length === 0) {
             return;
         }
-        const params = {
-            Bucket: AWS_BUCKET_NAME,
-            Key: `${Date.now()}.${file.name}`,
-            Body: file,
-        };
-        const { Location } = await s3.upload(params).promise();
-        setImageUrl(Location);
-        console.log("cargando a s3", Location);
+        try {
+            const imageUrls = [];
+            for (const img of files) {
+                console.log(img);
+
+                const params = {
+                    Bucket: AWS_BUCKET_NAME,
+                    Key: `${Date.now()}.${img.file.name}`,
+                    Body: img.file,
+                };
+                const { Location } = await s3.upload(params).promise();
+                imageUrls.push(Location);
+            }
+            setImageUrls(imageUrls);
+            console.log("Cargando a S3:", imageUrls);
+        } catch (error) {
+            console.error("Error al cargar a S3:", error);
+        }
     };
+
     return (
-        <div className="Container my-4">
-            <h1>Subida de archivo simple</h1>
-            <input type="file" onChange={handleFileSelect} />
-            {file && (
-                <div style={{ marginTop: "10px" }}>
-                    <button onClick={uploadToS3}>Upload</button>
-                </div>
+        <div className="flex m-4">
+            {files.length > 0 && (
+                <h2 className="text-white">Subir {files.length} archivos</h2>
             )}
-            {imageUrl && (
-                <div style={{ marginTop: "10px" }}>
-                    <img src={imageUrl} alt="uploaded" />
-                </div>
+            {files && (
+                <button
+                    className="bg-gray-800  hover:bg-green-300 text-white font-bold py-2 px-4 rounded flex-none"
+                    onClick={uploadToS3}>
+                    Upload
+                </button>
             )}
         </div>
     );

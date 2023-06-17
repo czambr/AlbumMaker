@@ -61,33 +61,37 @@ export const S3Viewer = () => {
     };
 
     return (
-        <div style={{ marginTop: "150px", marginBottom: "50px" }}>
-            <h1>Visualizar todos los objetos de un bucket</h1>
-            <button onClick={getFromS3}>Recargar</button>
-            {listFiles.length == 0 && <h3>No hay objetos que mostrar</h3>}
-            {listFiles.length > 0 && (
-                <ul>
-                    {listFiles.map((name, index) => (
-                        <li style={{ fontSize: "small" }} key={index}>
-                            {name.Key}
-                        </li>
-                    ))}
-                </ul>
-            )}
-            {listFiles.length > 0 && (
-                <div className="wrapper">
-                    {listFiles.map((name, index) => (
-                        <div
-                            style={{
-                                width: "200px",
-                                height: "200px",
-                                display: "flex",
-                            }}>
-                            <img key={index} src={formatUrl(name.Key)}></img>
-                        </div>
-                    ))}
+        <section className="m-8 px-4">
+            {/* {listFiles.length == 0 && <h3>No hay objetos que mostrar</h3>} */}
+            <article className="bg-gray-800 my-8 py-1 rounded-md">
+                <div className="flex p-4">
+                    <h1 className="text-lg text-gray-200 grow">
+                        Visualizar todos los objetos de un bucket
+                    </h1>
+                    <button
+                        className="bg-gray-200  hover:bg-green-300 font-bold py-2 px-4 rounded flex-none"
+                        onClick={getFromS3}>
+                        Recargar
+                    </button>
                 </div>
-            )}
-        </div>
+                {listFiles.length > 0 ? (
+                    <div
+                        className="grid grid-cols-1 md:grid-cols-4 gap-4 mx-3 my-8 p-2
+                        bg-gray-800 border-dashed border-4 -3">
+                        {listFiles.map((name, index) => (
+                            <div className="grow mb-2">
+                                <img
+                                    key={index}
+                                    src={formatUrl(name.Key)}></img>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <h3 className="text-center my-8 text-gray-200">
+                        No hay objetos que mostrar ☹
+                    </h3>
+                )}
+            </article>
+        </section>
     );
 };
