@@ -63,14 +63,18 @@ export const S3Uploader = () => {
     return (
         <div className="flex m-4">
             {files.length > 0 && (
-                <h2 className="text-white">Subir {files.length} archivos</h2>
+                <h2 className="text-white text-center flex-grow">
+                    Subir {files.length} archivos
+                </h2>
             )}
             {files && (
-                <button
-                    className="bg-gray-800  hover:bg-green-300 text-white font-bold py-2 px-4 rounded flex-none"
-                    onClick={uploadToS3}>
-                    Upload
-                </button>
+                <div className="text-end my-4 ">
+                    <button
+                        className="bg-gray-800  hover:bg-green-300 text-white font-bold py-2 px-4 rounded flex-none"
+                        onClick={uploadToS3}>
+                        Upload
+                    </button>
+                </div>
             )}
         </div>
     );

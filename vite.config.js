@@ -7,4 +7,16 @@ export default defineConfig({
     define: {
         global: {},
     },
+    resolve: {
+        alias: {
+            "./runtimeConfig": "./runtimeConfig.browser",
+        },
+    },
+    build: {
+        commonjsOptions: { include: [] },
+        chunkSizeWarningLimit: 100000,
+    },
+    optimizeDeps: {
+        disabled: false,
+    },
 });

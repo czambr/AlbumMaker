@@ -22,8 +22,8 @@ function App() {
 
             <albumContext.Provider value={[listImages, setImages]}>
                 <main className="m-8 px-4 ">
-                    <ImageUploaderGrid />
                     {listImages.length > 0 && <S3Uploader />}
+                    <ImageUploaderGrid />
                 </main>
             </albumContext.Provider>
             <S3Viewer />
