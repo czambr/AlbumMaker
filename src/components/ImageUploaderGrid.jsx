@@ -10,12 +10,11 @@ import { useDropzone } from "react-dropzone";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import ImgCard from "./ImgCard";
 import AreaUploader from "./AreaUploader";
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 // ------------------------------------------
 
 const ImageUploaderGrid = () => {
     const [images, setImages] = useContext(albumContext);
-    // const [images, setImages] = useState([]);
 
     const handleDrop = acceptedFiles => {
         const newImages = acceptedFiles.map(file => ({
@@ -66,7 +65,7 @@ const ImageUploaderGrid = () => {
                                 </h2>
                                 {images.length == 0 && (
                                     <h3 className="mt-8 text-center  text-gray-200">
-                                        Sube un archivo 😉
+                                        Sube un archivo
                                     </h3>
                                 )}
                             </div>

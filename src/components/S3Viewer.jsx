@@ -77,7 +77,7 @@ export const S3Viewer = () => {
                 {listFiles.length > 0 ? (
                     <div
                         className="grid grid-cols-1 md:grid-cols-4 gap-4 mx-3 my-8 p-2
-                        bg-gray-800 border-dashed border-4 -3">
+                        bg-gray-800 border-dashed border-4">
                         {listFiles.map((name, index) => (
                             <div className="grow mb-2">
                                 <img
@@ -88,7 +88,7 @@ export const S3Viewer = () => {
                     </div>
                 ) : (
                     <h3 className="text-center my-8 text-gray-200">
-                        No hay objetos que mostrar ☹
+                        No hay objetos que mostrar
                     </h3>
                 )}
             </article>

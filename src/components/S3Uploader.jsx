@@ -54,6 +54,7 @@ export const S3Uploader = () => {
             }
             setImageUrls(imageUrls);
             console.log("Cargando a S3:", imageUrls);
+            setFiles([]);
         } catch (error) {
             console.error("Error al cargar a S3:", error);
         }

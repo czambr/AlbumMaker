@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { S3Uploader } from "./components/S3Uploader";
 import { S3Viewer } from "./components/S3Viewer";
-import Formulario from "./components/Formulario";
 import Header from "./components/Header";
 import ImageUploaderGrid from "./components/ImageUploaderGrid";
 
@@ -10,6 +9,10 @@ export const formFacturaContext = React.createContext();
 
 function App() {
     const [listImages, setImages] = useState([]);
+    const [formulario, setFormulario] = useState({
+        form: [],
+        files: false,
+    });
 
     return (
         <div
@@ -19,10 +22,8 @@ function App() {
 
             <albumContext.Provider value={[listImages, setImages]}>
                 <main className="m-8 px-4 ">
-                    {listImages.length > 0 && (
-                        <S3Uploader value={[listImages, setImages]} />
-                    )}
                     <ImageUploaderGrid />
+                    {listImages.length > 0 && <S3Uploader />}
                 </main>
             </albumContext.Provider>
             <S3Viewer />
