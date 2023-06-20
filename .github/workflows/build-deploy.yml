@@ -32,4 +32,4 @@ jobs:
             - name: Build
               run: npm run build
             - name: Deploy
-              run: aws s3 sync ./dist s3://albummakerreact
+              run: aws s3 sync ./dist s3://proyectodesplegado-react
