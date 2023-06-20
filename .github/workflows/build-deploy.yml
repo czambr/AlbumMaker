@@ -10,7 +10,6 @@ env:
     REACT_APP_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
     REACT_APP_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     REACT_APP_AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-
 jobs:
     deploy:
         runs-on: ubuntu-latest
