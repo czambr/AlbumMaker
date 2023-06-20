@@ -1,14 +1,15 @@
 // ---------------------------------------------------------
 //  ==> Import de Credenciales de AWS
 // ---------------------------------------------------------
-
-import {
-    AWS_ACCESS_KEY_ID,
-    AWS_SECRET_ACCESS_KEY,
-    AWS_REGION,
-    AWS_SESSION_TOKEN,
-    AWS_BUCKET_NAME,
-} from "../../credentials-aws.json";
+// En el modo desarrollo, hacer uso de un .json para almacenar las
+// credenciales desde otros componentes
+// import {
+//     AWS_ACCESS_KEY_ID,
+//     AWS_SECRET_ACCESS_KEY,
+//     AWS_REGION,
+//     AWS_SESSION_TOKEN,
+//     AWS_BUCKET_NAME,
+// } from "../../credentials-aws.json";
 
 // ---------------------------------------------------------
 //  ==> Import de las dependencias
@@ -20,10 +21,10 @@ import { useState } from "react";
 // ---------------------------------------------------------
 
 AWS.config.update({
-    accessKeyId: AWS_ACCESS_KEY_ID,
-    secretAccessKey: AWS_SECRET_ACCESS_KEY,
-    region: AWS_REGION,
-    sessionToken: AWS_SESSION_TOKEN,
+    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+    region: "us-east-1",
+    sessionToken: process.env.REACT_APP_AWS_SESSION_TOKEN,
 });
 
 export const S3Viewer = () => {
@@ -33,7 +34,7 @@ export const S3Viewer = () => {
 
     const getFromS3 = e => {
         const params = {
-            Bucket: AWS_BUCKET_NAME,
+            Bucket: "albummakerreact",
         };
         s3.listObjectsV2(params, (err, data) => {
             if (err) {
