@@ -21,10 +21,10 @@ import { useState } from "react";
 // ---------------------------------------------------------
 
 AWS.config.update({
-    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.VITE_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.VITE_AWS_SECRET_ACCESS_KEY,
     region: "us-east-1",
-    sessionToken: process.env.REACT_APP_AWS_SESSION_TOKEN,
+    sessionToken: process.env.VITE_AWS_SESSION_TOKEN,
 });
 
 export const S3Viewer = () => {
