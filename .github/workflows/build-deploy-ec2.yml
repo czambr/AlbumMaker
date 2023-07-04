@@ -3,7 +3,7 @@ name: Build  & EC2 Deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 env:
           CI: false
