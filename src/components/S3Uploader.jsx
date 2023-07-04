@@ -25,10 +25,10 @@ import React, { useState, useContext } from "react";
 //  Configuration  AWS
 // ---------------------------------------------------------
 AWS.config.update({
-    accessKeyId: process.env.VITE_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.VITE_AWS_SECRET_ACCESS_KEY,
+    accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
+    secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
     region: "us-east-1",
-    sessionToken: process.env.VITE_AWS_SESSION_TOKEN,
+    sessionToken: import.meta.env.VITE_AWS_SESSION_TOKEN,
 });
 // ---------------------------------------------------------
 
